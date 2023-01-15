@@ -103,7 +103,10 @@
                               <Button fx:id="MainProductsAddButton" mnemonicParsing="false" onAction="#OnMainProductsAddButtonClick" text="Add" />
                               <Button fx:id="MainProductsModifyButton" mnemonicParsing="false" onAction="#OnMainProductsModifyButtonClick" text="Modify" />
                               <Button fx:id="MainProductsDeleteButton" mnemonicParsing="false" onAction="#OnMainProductsDeleteButtonClick" text="Delete" />
-                           </children></HBox>
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding></HBox>
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="15.0" />

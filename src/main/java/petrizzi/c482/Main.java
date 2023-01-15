@@ -1,5 +1,4 @@
 package petrizzi.c482;
-//I love Alex
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

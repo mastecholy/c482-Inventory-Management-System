@@ -62,7 +62,12 @@ public class MainFormController {
     }
 
     @FXML
-    void OnMainPartsModifyButtonClick(ActionEvent event) {
+    void OnMainPartsModifyButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("modify-part-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
     }
 
