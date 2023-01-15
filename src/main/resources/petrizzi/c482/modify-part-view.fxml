@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="565.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="petrizzi.c482.ModifyPartController">
+   <children>
+      <VBox layoutX="44.0" layoutY="12.0" prefHeight="541.0" prefWidth="512.0">
+         <children>
+            <GridPane alignment="CENTER" prefHeight="480.0" prefWidth="568.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="109.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="334.0" minWidth="10.0" prefWidth="153.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="334.0" minWidth="10.0" prefWidth="98.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="153.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="ModifyPartFormModifyPartLabel" alignment="CENTER" text="Modify Part">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="ModifyPartInHouseRadio" mnemonicParsing="false" selected="true" text="In-House" GridPane.columnIndex="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="ModifyPartRadioGroup" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="ModifyPartOutsourcedRadio" mnemonicParsing="false" text="Outsourced" toggleGroup="$ModifyPartRadioGroup" GridPane.columnIndex="2" />
+                  <Label text="ID" GridPane.rowIndex="1" />
+                  <Label fx:id="ModifyPartNameLabel" text="Name" GridPane.rowIndex="2" />
+                  <Label fx:id="ModifyPartInvLabel" text="Inv" GridPane.rowIndex="3" />
+                  <Label fx:id="ModifyPartPriceLabel" text="Price/Cost" GridPane.rowIndex="4" />
+                  <Label fx:id="ModifyPartMaxLabel" text="Max" GridPane.rowIndex="5" />
+                  <Label fx:id="ModifyPartMachineIDLabel" text="Machine ID" GridPane.rowIndex="6" />
+                  <TextField fx:id="ModifyPartIDTextField" promptText="Auto Gen- Disabled" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="ModifyPartNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="ModifyPartInvTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="ModifyPartPriceTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="ModifyPartMaxTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="ModifyPartMinTextField" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Label fx:id="ModifyPartMinLabel" text="Min" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="113.0" spacing="20.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                     <children>
+                        <Button fx:id="ModifyPartSaveButton" mnemonicParsing="false" text="Save" />
+                        <Button fx:id="ModifyPartCancelButton" mnemonicParsing="false" text="Cancel" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="ModifyPartMachineIDTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="ModifyPartCompanyNameLabel" text="Company Name" GridPane.rowIndex="6" />
+                  <TextField fx:id="ModifyPartCompanyNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
