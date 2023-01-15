@@ -20,7 +20,6 @@ public class AddPartController {
 
     @FXML
     private Label AddPartFormAddPartLabel;
-//Pizza fcking pizza
     @FXML
     private TextField AddPartIDTextField;
 
