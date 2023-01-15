@@ -52,7 +52,7 @@
                   <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="113.0" spacing="20.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                      <children>
                         <Button fx:id="AddPartSaveButton" mnemonicParsing="false" text="Save" />
-                        <Button fx:id="AddPartCancelButton" mnemonicParsing="false" text="Cancel" />
+                        <Button fx:id="AddPartCancelButton" mnemonicParsing="false" onAction="#OnAddPartCancelButtonClick" text="Cancel" />
                      </children>
                   </HBox>
                   <TextField fx:id="AddPartMachineIDTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />

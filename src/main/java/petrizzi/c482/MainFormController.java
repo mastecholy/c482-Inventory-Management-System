@@ -47,7 +47,12 @@ public class MainFormController {
     private Button MainProductsModifyButton;
 
     @FXML
-    void OnMainPartsAddButtonClick(ActionEvent event) {
+    void OnMainPartsAddButtonClick(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("add-part-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
     }
 
