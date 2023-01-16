@@ -1,5 +1,4 @@
 package petrizzi.c482;
-//MODELS BRANCH
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
