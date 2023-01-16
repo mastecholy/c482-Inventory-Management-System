@@ -63,20 +63,33 @@ public class Inventory {
     }
 
     public static void updatePart(int index, Part selectedPart) {
-
+        allParts.set(index, selectedPart);
     }
 
     public static void updateProduct(int index, Product newProduct) {
-
+        allProducts.set(index, newProduct);
     }
 
-    /*public static boolean deletePart(Part selectedPart) {
+    public static boolean deletePart(Part selectedPart) {
+        for (Part part : allParts) {
+            if (part.getId() == selectedPart.getId()) {
+                allParts.remove(part);
+                return true;
+            }
+        }
+        return false;
+    }
 
-    }*/
+    public static boolean deleteProduct(Product selectedProduct) {
+        for (Product product : allProducts) {
+            if (product.getId() == selectedProduct.getId()) {
+                allProducts.remove(product);
+                return true;
+            }
+        }
+        return false;
 
-    /*public static boolean deleteProduct(Product selectedProduct) {
-
-    }*/
+    }
 
     public static ObservableList<Part> getAllParts() {
         return allParts;
