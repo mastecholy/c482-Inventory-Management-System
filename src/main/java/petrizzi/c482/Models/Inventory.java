@@ -62,8 +62,21 @@ public class Inventory {
         return products;
     }
 
+    public static void updatePart(int index, Part selectedPart) {
 
+    }
 
+    public static void updateProduct(int index, Product newProduct) {
+
+    }
+
+    /*public static boolean deletePart(Part selectedPart) {
+
+    }*/
+
+    /*public static boolean deleteProduct(Product selectedProduct) {
+
+    }*/
 
     public static ObservableList<Part> getAllParts() {
         return allParts;
