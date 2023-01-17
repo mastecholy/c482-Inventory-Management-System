@@ -1,19 +1,30 @@
 package petrizzi.c482;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainFormController {
+
+import static petrizzi.c482.Models.Inventory.getAllParts;
+import static petrizzi.c482.Models.Inventory.getAllProducts;
+
+public class MainFormController implements Initializable {
 
     private Stage stage;
     private Scene scene;
@@ -45,6 +56,52 @@ public class MainFormController {
 
     @FXML
     private Button MainProductsModifyButton;
+
+    @FXML
+    public TableView MainFormPartsTable;
+
+    @FXML
+    public TableColumn MainPartsTablePartIDColumn;
+
+    @FXML
+    public TableColumn MainPartsTableNameColumn;
+
+    @FXML
+    public TableColumn MainPartsTableInvColumn;
+
+    @FXML
+    public TableColumn MainPartsTablePriceColumn;
+
+    @FXML
+    public TableView MainFormProductsTable;
+
+    @FXML
+    public TableColumn MainProductsTableIDColumn;
+
+    @FXML
+    public TableColumn MainProductsTableNameColumn;
+
+    @FXML
+    public TableColumn MainProductsTableInvColumn;
+
+    @FXML
+    public TableColumn MainProductsTablePriceColumn;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+        MainFormPartsTable.setItems(getAllParts());
+        MainPartsTablePartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        MainPartsTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        MainPartsTableInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        MainPartsTablePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        MainFormProductsTable.setItems(getAllProducts());
+        MainProductsTableIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        MainProductsTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        MainProductsTableInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        MainProductsTablePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
 
     @FXML
     void OnMainPartsAddButtonClick(ActionEvent event) throws IOException {
