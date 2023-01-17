@@ -15,14 +15,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import petrizzi.c482.Models.Inventory;
+import petrizzi.c482.Models.Part;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-import static petrizzi.c482.Models.Inventory.getAllParts;
-import static petrizzi.c482.Models.Inventory.getAllProducts;
+import static petrizzi.c482.Models.Inventory.*;
 
 public class MainFormController implements Initializable {
 
@@ -115,6 +115,11 @@ public class MainFormController implements Initializable {
 
     @FXML
     void OnMainPartsDeleteButtonClick(ActionEvent event) {
+        Part selectedPart = (Part) MainFormPartsTable.getSelectionModel().getSelectedItem();
+
+        if(selectedPart==null) return;
+        Inventory.getAllParts().remove(selectedPart);
+
 
     }
 

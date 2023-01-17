@@ -112,14 +112,15 @@ public class AddPartController {
     @FXML
     void OnOutsourcedRadioButtonClick(ActionEvent event) {
             AddPartMachineIDLabel.setText("Company Name");
-            isInHouse = false;
+            //isInHouse = false;
     }
 
     @FXML
     void OnInHouseRadioButtonClick(ActionEvent event) {
         AddPartMachineIDLabel.setText("Machine ID");
-        isInHouse = true;
+        //isInHouse = true;
     }
+
 
     @FXML
     void OnAddPartSaveButtonClick(ActionEvent event) throws IOException {
@@ -130,28 +131,29 @@ public class AddPartController {
             if(!Integer.class.isInstance(Integer.parseInt((AddPartInvTextField.getText())))){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Inventory value must be of type integer.");
                 alert.showAndWait();
-            } if (!Double.class.isInstance((Double.parseDouble(AddPartPriceTextField.getText())))){
+            } else if (!Double.class.isInstance((Double.parseDouble(AddPartPriceTextField.getText())))){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Price value must be of type double.");
                 alert.showAndWait();
-            } if(!Integer.class.isInstance(Integer.parseInt((AddPartMaxTextField.getText())))) {
+            } else if(!Integer.class.isInstance(Integer.parseInt((AddPartMaxTextField.getText())))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Max value must be of type integer.");
                 alert.showAndWait();
-            } if(!Integer.class.isInstance(Integer.parseInt((AddPartMinTextField.getText())))) {
+            } else if(!Integer.class.isInstance(Integer.parseInt((AddPartMinTextField.getText())))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Min value must be of type integer.");
                 alert.showAndWait();
-            }  if(!(Integer.parseInt(AddPartMaxTextField.getText()) >= Integer.parseInt(AddPartInvTextField.getText()) &&
+            }  else if(!(Integer.parseInt(AddPartMaxTextField.getText()) >= Integer.parseInt(AddPartInvTextField.getText()) &&
                     Integer.parseInt(AddPartInvTextField.getText()) >= Integer.parseInt(AddPartMinTextField.getText()))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Inventory value must be between the min and max values.");
                 alert.showAndWait();
             }
 
-            else if (isInHouse = true) {
+            else if (AddPartInHouseRadio.isSelected()) {
 
                 if(!Integer.class.isInstance(Integer.parseInt((AddPartMachineIDTextField.getText())))) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Machine ID value must be of type integer.");
 
                 } else {
                     int machineID = Integer.parseInt(AddPartMachineIDTextField.getText());
+                    System.out.println("1");
 
                     InHouse addInHousePart = new InHouse(idCounter, AddPartNameTextField.getText(),
                             Double.parseDouble(AddPartPriceTextField.getText()),
@@ -165,8 +167,9 @@ public class AddPartController {
                 }
             }
 
-            else if (isInHouse = false) {
+            else if (AddPartOutsourcedRadio.isSelected()) {
                 String companyName = AddPartMachineIDTextField.getText();
+                System.out.println("2");
 
 
                 Outsourced addOutsourcedPart = new Outsourced(idCounter, AddPartNameTextField.getText(),
