@@ -31,18 +31,18 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="AddPartInHouseRadio" mnemonicParsing="false" selected="true" text="In-House" GridPane.columnIndex="1">
+                  <RadioButton fx:id="AddPartInHouseRadio" mnemonicParsing="false" onAction="#OnInHouseRadioButtonClick" selected="true" text="In-House" GridPane.columnIndex="1">
                      <toggleGroup>
                         <ToggleGroup fx:id="AddPartRadioGroup" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="AddPartOutsourcedRadio" mnemonicParsing="false" text="Outsourced" toggleGroup="$AddPartRadioGroup" GridPane.columnIndex="2" />
+                  <RadioButton fx:id="AddPartOutsourcedRadio" mnemonicParsing="false" onAction="#OnOutsourcedRadioButtonClick" text="Outsourced" toggleGroup="$AddPartRadioGroup" GridPane.columnIndex="2" />
                   <Label text="ID" GridPane.rowIndex="1" />
                   <Label fx:id="AddPartNameLabel" text="Name" GridPane.rowIndex="2" />
                   <Label fx:id="AddPartInvLabel" text="Inv" GridPane.rowIndex="3" />
                   <Label fx:id="AddPartPriceLabel" text="Price/Cost" GridPane.rowIndex="4" />
                   <Label fx:id="AddPartMaxLabel" text="Max" GridPane.rowIndex="5" />
                   <Label fx:id="AddPartMachineIDLabel" text="Machine ID" GridPane.rowIndex="6" />
-                  <TextField fx:id="AddPartIDTextField" promptText="Auto Gen- Disabled" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="AddPartIDTextField" disable="true" promptText="Auto Gen- Disabled" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="AddPartNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="AddPartInvTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="AddPartPriceTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -51,13 +51,11 @@
                   <Label fx:id="AddPartMinLabel" text="Min" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="113.0" spacing="20.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                      <children>
-                        <Button fx:id="AddPartSaveButton" mnemonicParsing="false" text="Save" />
+                        <Button fx:id="AddPartSaveButton" mnemonicParsing="false" onAction="#OnAddPartSaveButtonClick" text="Save" />
                         <Button fx:id="AddPartCancelButton" mnemonicParsing="false" onAction="#OnAddPartCancelButtonClick" text="Cancel" />
                      </children>
                   </HBox>
                   <TextField fx:id="AddPartMachineIDTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label fx:id="AddPartCompanyNameLabel" text="Company Name" GridPane.rowIndex="6" />
-                  <TextField fx:id="AddPartCompanyNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                </children>
             </GridPane>
          </children>

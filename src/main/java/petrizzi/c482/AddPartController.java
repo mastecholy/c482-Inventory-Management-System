@@ -12,10 +12,17 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import petrizzi.c482.Models.InHouse;
+import petrizzi.c482.Models.Inventory;
+import petrizzi.c482.Models.Outsourced;
 
 import java.io.IOException;
 
 public class AddPartController {
+
+    public void initialize() {
+        AddPartIDTextField.setText(String.valueOf(idCounter));
+    }
 
     private Stage stage;
     private Scene scene;
@@ -84,6 +91,12 @@ public class AddPartController {
     private Button AddPartSaveButton;
 
     @FXML
+    private int idCounter = 1;
+
+
+
+
+    @FXML
     void OnAddPartCancelButtonClick(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -91,5 +104,57 @@ public class AddPartController {
         stage.setScene(scene);
         stage.show();
     }
+
+
+    private boolean isInHouse = true;
+    @FXML
+    void OnOutsourcedRadioButtonClick(ActionEvent event) {
+            AddPartMachineIDLabel.setText("Company Name");
+            isInHouse = false;
+    }
+
+    @FXML
+    void OnInHouseRadioButtonClick(ActionEvent event) {
+        AddPartMachineIDLabel.setText("Machine ID");
+        isInHouse = true;
+    }
+
+    @FXML
+    void OnAddPartSaveButtonClick(ActionEvent event) throws IOException {
+
+
+        if (isInHouse = true) {
+            int machineID = Integer.parseInt(AddPartMachineIDTextField.getText());
+
+            InHouse addInHousePart = new InHouse(idCounter, AddPartNameTextField.getText(),
+                    Double.parseDouble(AddPartPriceTextField.getText()), Integer.parseInt(AddPartInvTextField.getText()),
+                    Integer.parseInt(AddPartMinTextField.getText()), Integer.parseInt(AddPartMaxTextField.getText()), machineID);
+
+            Inventory.addPart(addInHousePart);
+        }
+
+        if (isInHouse = false) {
+            String companyName = AddPartMachineIDTextField.getText();
+
+            Outsourced addOutsourcedPart = new Outsourced(idCounter, AddPartNameTextField.getText(),
+                    Double.parseDouble(AddPartPriceTextField.getText()),
+                    Integer.parseInt(AddPartInvTextField.getText()),
+                    Integer.parseInt(AddPartMinTextField.getText()),
+                    Integer.parseInt(AddPartMaxTextField.getText()), companyName);
+
+            Inventory.addPart(addOutsourcedPart);
+        }
+        System.out.println(Inventory.lookupPart(1).getPrice());
+
+        root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+
+
 
 }
