@@ -127,10 +127,13 @@ public class AddPartController {
             int machineID = Integer.parseInt(AddPartMachineIDTextField.getText());
 
             InHouse addInHousePart = new InHouse(idCounter, AddPartNameTextField.getText(),
-                    Double.parseDouble(AddPartPriceTextField.getText()), Integer.parseInt(AddPartInvTextField.getText()),
-                    Integer.parseInt(AddPartMinTextField.getText()), Integer.parseInt(AddPartMaxTextField.getText()), machineID);
+                    Double.parseDouble(AddPartPriceTextField.getText()),
+                    Integer.parseInt(AddPartInvTextField.getText()),
+                    Integer.parseInt(AddPartMinTextField.getText()),
+                    Integer.parseInt(AddPartMaxTextField.getText()), machineID);
 
             Inventory.addPart(addInHousePart);
+            idCounter++;
         }
 
         if (isInHouse = false) {
@@ -143,8 +146,9 @@ public class AddPartController {
                     Integer.parseInt(AddPartMaxTextField.getText()), companyName);
 
             Inventory.addPart(addOutsourcedPart);
+            idCounter++;
         }
-        System.out.println(Inventory.lookupPart(1).getPrice());
+
 
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -152,7 +156,6 @@ public class AddPartController {
         stage.setScene(scene);
         stage.show();
     }
-
 
 
 
