@@ -23,6 +23,10 @@ public class AddPartController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private static double price;
+    private static int max;
+    private static int min;
+    private static int inv;
 
     @FXML
     private Button AddPartCancelButton;
@@ -125,58 +129,78 @@ public class AddPartController {
     @FXML
     void OnAddPartSaveButtonClick(ActionEvent event) throws IOException {
 
-
+        if (AddPartNameTextField.getText().isBlank()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a name.");
+            alert.showAndWait();
+            return;
+        }
         try {
-
-            if(!Integer.class.isInstance(Integer.parseInt((AddPartInvTextField.getText())))){
+            try {
+                inv = Integer.parseInt(AddPartInvTextField.getText());}
+            catch(NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Inventory value must be of type integer.");
                 alert.showAndWait();
-            } else if (!Double.class.isInstance((Double.parseDouble(AddPartPriceTextField.getText())))){
+                return;
+            }
+            try {
+                price = Double.parseDouble(AddPartPriceTextField.getText());}
+            catch(NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Price value must be of type double.");
                 alert.showAndWait();
-            } else if(!Integer.class.isInstance(Integer.parseInt((AddPartMaxTextField.getText())))) {
+                return;
+            }
+            try {
+                max = Integer.parseInt(AddPartMaxTextField.getText());}
+            catch(NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Max value must be of type integer.");
                 alert.showAndWait();
-            } else if(!Integer.class.isInstance(Integer.parseInt((AddPartMinTextField.getText())))) {
+                return;
+            }
+            try {
+                min = Integer.parseInt(AddPartMinTextField.getText());}
+            catch(NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Min value must be of type integer.");
                 alert.showAndWait();
-            }  else if(!(Integer.parseInt(AddPartMaxTextField.getText()) >= Integer.parseInt(AddPartInvTextField.getText()) &&
-                    Integer.parseInt(AddPartInvTextField.getText()) >= Integer.parseInt(AddPartMinTextField.getText()))) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Inventory value must be between the min and max values.");
-                alert.showAndWait();
+                return;
             }
+
+            if(!(max >= inv && inv >= min)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Inventory value must be between the min and max values.");
+                    alert.showAndWait();
+                    return;
+                }
 
             else if (AddPartInHouseRadio.isSelected()) {
 
-                if(!Integer.class.isInstance(Integer.parseInt((AddPartMachineIDTextField.getText())))) {
+                int machineID = 0;
+                try {
+                    machineID = Integer.parseInt(AddPartMachineIDTextField.getText());
+                } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Machine ID value must be of type integer.");
-
-                } else {
-                    int machineID = Integer.parseInt(AddPartMachineIDTextField.getText());
-                    System.out.println("1");
-
-                    InHouse addInHousePart = new InHouse(idCounter, AddPartNameTextField.getText(),
-                            Double.parseDouble(AddPartPriceTextField.getText()),
-                            Integer.parseInt(AddPartInvTextField.getText()),
-                            Integer.parseInt(AddPartMinTextField.getText()),
-                            Integer.parseInt(AddPartMaxTextField.getText()), machineID);
-
-                    Inventory.addPart(addInHousePart);
-                    idCounter++;
-                    goToMain(event);
+                    alert.showAndWait();
+                    return;
                 }
+
+
+                InHouse addInHousePart = new InHouse(idCounter, AddPartNameTextField.getText(),
+                        price, inv, min, max, machineID);
+
+                Inventory.addPart(addInHousePart);
+                idCounter++;
+                goToMain(event);
+
             }
 
             else if (AddPartOutsourcedRadio.isSelected()) {
+                if (AddPartMachineIDTextField.getText().isBlank()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a Company Name.");
+                    alert.showAndWait();
+                    return;
+                }
                 String companyName = AddPartMachineIDTextField.getText();
-                System.out.println("2");
-
 
                 Outsourced addOutsourcedPart = new Outsourced(idCounter, AddPartNameTextField.getText(),
-                        Double.parseDouble(AddPartPriceTextField.getText()),
-                        Integer.parseInt(AddPartInvTextField.getText()),
-                        Integer.parseInt(AddPartMinTextField.getText()),
-                        Integer.parseInt(AddPartMaxTextField.getText()), companyName);
+                        price, inv, min, max, companyName);
 
                 Inventory.addPart(addOutsourcedPart);
                 idCounter++;
@@ -184,20 +208,17 @@ public class AddPartController {
                 goToMain(event);
             }
 
+            }
 
+            catch(NumberFormatException e){
+                Alert alert= new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setContentText("Please enter valid inputs for every text field.");
+                alert.showAndWait();
+            }
 
 
         }
-
-        catch(NumberFormatException e){
-            Alert alert= new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setContentText("Please enter valid inputs for every text field.");
-            alert.showAndWait();
-        }
-
-
-    }
 
 
 
