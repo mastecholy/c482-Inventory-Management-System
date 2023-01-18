@@ -1,6 +1,7 @@
 package petrizzi.c482;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,17 +10,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import petrizzi.c482.Models.InHouse;
 import petrizzi.c482.Models.Inventory;
 import petrizzi.c482.Models.Part;
+import petrizzi.c482.Models.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static petrizzi.c482.Models.Inventory.*;
@@ -58,7 +61,7 @@ public class MainFormController implements Initializable {
     private Button MainProductsModifyButton;
 
     @FXML
-    public TableView MainFormPartsTable;
+    public TableView<Part> MainFormPartsTable;
 
     @FXML
     public TableColumn MainPartsTablePartIDColumn;
@@ -73,7 +76,7 @@ public class MainFormController implements Initializable {
     public TableColumn MainPartsTablePriceColumn;
 
     @FXML
-    public TableView MainFormProductsTable;
+    public TableView<Product> MainFormProductsTable;
 
     @FXML
     public TableColumn MainProductsTableIDColumn;
@@ -89,6 +92,7 @@ public class MainFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
 
         MainFormPartsTable.setItems(getAllParts());
         MainPartsTablePartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -115,21 +119,40 @@ public class MainFormController implements Initializable {
 
     @FXML
     void OnMainPartsDeleteButtonClick(ActionEvent event) {
-        Part selectedPart = (Part) MainFormPartsTable.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected part?");
+        alert.setTitle("DELETE PART?");
+        Optional<ButtonType> result = alert.showAndWait();
 
-        if(selectedPart==null) return;
-        Inventory.getAllParts().remove(selectedPart);
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Part selectedPart = (Part) MainFormPartsTable.getSelectionModel().getSelectedItem();
+            if (selectedPart == null) return;
+            Inventory.getAllParts().remove(selectedPart);
+        }
 
 
     }
 
     @FXML
+    public void partSearchKeyEvent(KeyEvent event){
+            MainFormPartsTable.setItems(getAllFilteredParts(MainFormPartsSearchTextField.getText()));
+
+    }
+
+    @FXML
     void OnMainPartsModifyButtonClick(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("modify-part-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Part selectedPart = MainFormPartsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedPart != null) {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("modify-part-view.fxml"));
+            root = loader.load();
+            ModifyPartController modifyPartController = loader.getController();
+            modifyPartController.setPart(selectedPart);
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
@@ -144,7 +167,15 @@ public class MainFormController implements Initializable {
 
     @FXML
     void OnMainProductsDeleteButtonClick(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected product?");
+        alert.setTitle("DELETE PRODUCT?");
+        Optional<ButtonType> result = alert.showAndWait();
 
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Product selectedProduct = (Product) MainFormProductsTable.getSelectionModel().getSelectedItem();
+            if (selectedProduct == null) return;
+            Inventory.getAllParts().remove(selectedProduct);
+        }
     }
 
     @FXML

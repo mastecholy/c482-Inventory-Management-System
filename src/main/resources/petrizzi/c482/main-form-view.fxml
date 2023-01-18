@@ -41,7 +41,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="MainFormPartsSearchTextField" prefHeight="25.0" prefWidth="175.0" promptText="Search by Part ID or Name" />
+                              <TextField fx:id="MainFormPartsSearchTextField" onKeyReleased="#partSearchKeyEvent" prefHeight="25.0" prefWidth="175.0" promptText="Search by Part ID or Name" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" />

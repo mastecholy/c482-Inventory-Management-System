@@ -22,7 +22,7 @@ public class Inventory {
         allProducts.add(product);
     }
 
-    public static Product lookupProduct(int productID) {
+    public static Product lookupProductID(int productID) {
         for (int i = 0, productsSize = allProducts.size(); i < productsSize; i++) {
             Product product = allProducts.get(i);
 
@@ -33,7 +33,7 @@ public class Inventory {
         return null;
     }
 
-    public static Part lookupPart(int partID) {
+    public static Part lookupPartID(int partID) {
         for (int i = 0, partSize = allParts.size(); i < partSize; i++) {
             Part part = allParts.get(i);
 
@@ -99,16 +99,18 @@ public class Inventory {
         return allParts;
     }
 
-    public static ObservableList<Part> getAllFilteredPartsParts() {
-        return allParts;
-    }
+    public static ObservableList<Part> getAllFilteredParts(String query){
+        allFilteredParts = lookupPart(query);
+        try {
+            Part p = lookupPartID(Integer.parseInt(query));
+            allFilteredParts.add(p);
+        } catch(NumberFormatException e) {}
 
+        return allFilteredParts;
+    }
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
 
-    public static ObservableList<Part> getAllFilteredProducts() {
-        return allParts;
-    }
 
 }

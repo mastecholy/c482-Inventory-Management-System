@@ -111,18 +111,14 @@ public class AddPartController {
         stage.show();
     }
 
-
-    public boolean isInHouse = true;
     @FXML
     void OnOutsourcedRadioButtonClick(ActionEvent event) {
             AddPartMachineIDLabel.setText("Company Name");
-            //isInHouse = false;
     }
 
     @FXML
     void OnInHouseRadioButtonClick(ActionEvent event) {
         AddPartMachineIDLabel.setText("Machine ID");
-        //isInHouse = true;
     }
 
 
