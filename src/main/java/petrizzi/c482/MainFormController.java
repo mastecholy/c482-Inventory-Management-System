@@ -159,6 +159,10 @@ public class MainFormController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a part to modify.");
+            alert.showAndWait();
+        }
 
     }
 
@@ -186,20 +190,25 @@ public class MainFormController implements Initializable {
 
     @FXML
     void OnMainProductsModifyButtonClick(ActionEvent event) throws IOException {
-        Product selectedProduct = MainFormProductsTable.getSelectionModel().getSelectedItem();
+        Product tempSelectedProduct = MainFormProductsTable.getSelectionModel().getSelectedItem();
+        System.out.println(tempSelectedProduct);
 
-        if (selectedProduct != null) {
+        if (tempSelectedProduct != null) {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("modify-product-view.fxml"));
             root = loader.load();
             ModifyProductController modifyProductController = loader.getController();
-            modifyProductController.setProduct(selectedProduct);
+            modifyProductController.setProduct(tempSelectedProduct, getAllParts());
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+            System.out.println(tempSelectedProduct);
         }
-
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a part to modify.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

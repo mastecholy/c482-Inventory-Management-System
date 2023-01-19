@@ -94,46 +94,46 @@
             </VBox>
             <VBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="571.0" prefWidth="572.0">
                <children>
-                  <TextField fx:id="ModifyProductSearchTextField" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Search By Part ID or Name">
+                  <TextField fx:id="ModifyProductSearchTextField" maxWidth="-Infinity" onKeyReleased="#partSearchKeyEvent" prefHeight="25.0" prefWidth="200.0" promptText="Search By Part ID or Name">
                      <VBox.margin>
                         <Insets right="20.0" />
                      </VBox.margin>
                   </TextField>
                   <TableView fx:id="ModifyPartTopTableView" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="52.0" text="Part ID" />
-                      <TableColumn prefWidth="126.0" text="Part Name" />
-                        <TableColumn prefWidth="100.0" text="Inventory Level" />
-                        <TableColumn prefWidth="123.0" text="Price/Cost per Unit" />
+                      <TableColumn fx:id="AddProductTablePartIDColumn" prefWidth="52.0" text="Part ID" />
+                      <TableColumn fx:id="AddProductTableNameColumn" prefWidth="126.0" text="Part Name" />
+                        <TableColumn fx:id="AddProductTableInvColumn" prefWidth="100.0" text="Inventory Level" />
+                        <TableColumn fx:id="AddProductTablePriceColumn" prefWidth="123.0" text="Price/Cost per Unit" />
                     </columns>
                      <VBox.margin>
                         <Insets left="150.0" right="20.0" top="10.0" />
                      </VBox.margin>
                   </TableView>
-                  <Button fx:id="ModifyProductAddButton" mnemonicParsing="false" text="Add">
+                  <Button fx:id="ModifyProductAddButton" mnemonicParsing="false" onAction="#OnAddProductAddPartButtonClick" text="Add">
                      <VBox.margin>
                         <Insets bottom="10.0" right="20.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <TableView fx:id="ModifyProductBottomTableView" layoutX="160.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="ModifyProductAssocTableView" layoutX="160.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0">
                      <columns>
-                        <TableColumn prefWidth="45.0" text="Part ID" />
-                        <TableColumn prefWidth="130.0" text="Part Name" />
-                        <TableColumn prefWidth="100.0" text="Inventory Level" />
-                        <TableColumn prefWidth="124.0" text="Price/Cost per Unit" />
+                        <TableColumn fx:id="AssocTablePartIDColumn" prefWidth="45.0" text="Part ID" />
+                        <TableColumn fx:id="AssocPartTableNameColumn" prefWidth="130.0" text="Part Name" />
+                        <TableColumn fx:id="AssocPartTableInvColumn" prefWidth="100.0" text="Inventory Level" />
+                        <TableColumn fx:id="AssocPartTablePriceColumn" prefWidth="124.0" text="Price/Cost per Unit" />
                      </columns>
                      <VBox.margin>
                         <Insets left="150.0" right="20.0" top="10.0" />
                      </VBox.margin>
                   </TableView>
-                  <Button fx:id="ModifyProductRemoveAssocPartButton" mnemonicParsing="false" text="Remove Associated Part">
+                  <Button fx:id="ModifyProductRemoveAssocPartButton" mnemonicParsing="false" onAction="#OnAddProductRemovePartButtonClick" text="Remove Associated Part">
                      <VBox.margin>
                         <Insets right="20.0" top="10.0" />
                      </VBox.margin>
                   </Button>
                   <HBox alignment="TOP_RIGHT" prefHeight="46.0" prefWidth="572.0" spacing="20.0">
                      <children>
-                        <Button fx:id="ModifyProductSaveButton" mnemonicParsing="false" text="Save" />
+                        <Button fx:id="ModifyProductSaveButton" mnemonicParsing="false" onAction="#OnModifyProductSaveButtonClick" text="Save" />
                         <Button fx:id="ModifyProductCancelButton" mnemonicParsing="false" onAction="#OnModifyProductCancelButtonClick" text="Cancel" />
                      </children>
                      <VBox.margin>

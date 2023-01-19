@@ -33,6 +33,7 @@ public class ModifyPartController {
 
     void setPart (Part part) {
         selectedPart = part;
+        System.out.println(selectedPart);
         ModifyPartIDTextField.setText(String.valueOf(selectedPart.getId()));
         ModifyPartNameTextField.setText(selectedPart.getName());
         ModifyPartPriceTextField.setText(String.valueOf(selectedPart.getPrice()));
