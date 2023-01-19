@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 import petrizzi.c482.Models.*;
 
 
@@ -27,6 +28,7 @@ public class ModifyProductController {
 
     ObservableList<Part> availPartListProduct = FXCollections.observableArrayList();
     ObservableList<Part> assocPartListProducts = FXCollections.observableArrayList();
+    ObservableList<Part> tempList = FXCollections.observableArrayList();
 
     private Stage stage;
     private Scene scene;
@@ -38,77 +40,65 @@ public class ModifyProductController {
     private static int inv;
     private static double price;
 
-/*    void setProduct (Product tempSelectedProduct) {
+    void setProduct (Product tempSelectedProduct) {
         selectedProduct = tempSelectedProduct;
-        ModifyProductIDTextField.setText(String.valueOf(selectedProduct.getId()));
-        ModifyProductNameTextField.setText(selectedProduct.getName());
-        ModifyProductPriceTextField.setText(String.valueOf(selectedProduct.getPrice()));
-        ModifyProductInvTextField.setText(String.valueOf(selectedProduct.getStock()));
-        ModifyProductMaxTextField.setText(String.valueOf(selectedProduct.getMax()));
-        ModifyProductMinTextField.setText(String.valueOf(selectedProduct.getMin()));
-    }*/
-
-    @FXML
-    public TableView<Part> ModifyProductTopTableView;
-
-    @FXML
-    public TableColumn ModifyProductTopTablePartIDColumn;
-
-    @FXML
-    public TableColumn ModifyProductTopTableNameColumn;
-
-    @FXML
-    public TableColumn ModifyProductTopTableInvColumn;
-
-    @FXML
-    public TableColumn ModifyProductTopTablePriceColumn;
-
-    @FXML
-    private TableView<Part> ModifyProductAssocTableView;
-
-    @FXML
-    public TableColumn AssocTablePartIDColumn;
-
-    @FXML
-    public TableColumn AssocPartTableNameColumn;
-
-    @FXML
-    public TableColumn AssocPartTableInvColumn;
-
-    @FXML
-    public TableColumn AssocPartTablePriceColumn;
-
-    void setProduct(Product tempSelectedProduct, ObservableList<Part> allPartsList) {
-        selectedProduct = tempSelectedProduct;
-        ModifyProductIDTextField.setText(String.valueOf(selectedProduct.getId()));
-        ModifyProductNameTextField.setText(selectedProduct.getName());
-        ModifyProductPriceTextField.setText(String.valueOf(selectedProduct.getPrice()));
-        ModifyProductInvTextField.setText(String.valueOf(selectedProduct.getStock()));
-        ModifyProductMaxTextField.setText(String.valueOf(selectedProduct.getMax()));
-        ModifyProductMinTextField.setText(String.valueOf(selectedProduct.getMin()));
-//???????????????????????????????????????????????????????????????????????????????????????????????
-        System.out.println(selectedProduct);
-        availPartListProduct = allPartsList;
-        Product newProduct = new Product(0, null, 0.0, 0, 0, 0);
-        assocPartListProducts = newProduct.getAllAssociatedParts();
+        availPartListProduct = getAllParts();
         ModifyProductTopTableView.setItems(availPartListProduct);
-        ModifyProductAssocTableView.setItems(assocPartListProducts);
+
+
+        ModifyProductIDTextField.setText(String.valueOf(selectedProduct.getId()));
+        ModifyProductNameTextField.setText(selectedProduct.getName());
+        ModifyProductPriceTextField.setText(String.valueOf(selectedProduct.getPrice()));
+        ModifyProductInvTextField.setText(String.valueOf(selectedProduct.getStock()));
+        ModifyProductMaxTextField.setText(String.valueOf(selectedProduct.getMax()));
+        ModifyProductMinTextField.setText(String.valueOf(selectedProduct.getMin()));
+
 
         ModifyProductTopTablePartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         ModifyProductTopTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ModifyProductTopTableInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         ModifyProductTopTablePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-
+        assocPartListProducts = selectedProduct.getAllAssociatedParts();
+        tempList = assocPartListProducts;
+        ModifyProductAssocTableView.setItems(tempList);
 
         AssocTablePartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         AssocPartTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         AssocPartTableInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         AssocPartTablePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
     }
 
+    @FXML
+    public TableView<Part> ModifyProductTopTableView;
 
+    @FXML
+    public TableColumn<Object, Object> ModifyProductTopTablePartIDColumn;
 
+    @FXML
+    public TableColumn<Object, Object> ModifyProductTopTableNameColumn;
+
+    @FXML
+    public TableColumn<Object, Object> ModifyProductTopTableInvColumn;
+
+    @FXML
+    public TableColumn<Object, Object> ModifyProductTopTablePriceColumn;
+
+    @FXML
+    private TableView<Part> ModifyProductAssocTableView;
+
+    @FXML
+    public TableColumn<Object, Object> AssocTablePartIDColumn;
+
+    @FXML
+    public TableColumn<Object, Object> AssocPartTableNameColumn;
+
+    @FXML
+    public TableColumn<Object, Object> AssocPartTableInvColumn;
+
+    @FXML
+    public TableColumn<Object, Object> AssocPartTablePriceColumn;
 
     @FXML
     private Button ModifyProductAddButton;
@@ -153,14 +143,13 @@ public class ModifyProductController {
     void OnAddProductAddPartButtonClick(ActionEvent event){
         Part selectedPart = ModifyProductTopTableView.getSelectionModel().getSelectedItem();
 
-        if (assocPartListProducts.contains(selectedPart)) {
+        if (tempList.contains(selectedPart)) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Part already associated with product.");
             alert.showAndWait();
         }
         else if (selectedPart != null) {
-            Part tempPart = selectedPart;
-            assocPartListProducts.add(tempPart);
-        } else  if (selectedPart == null){
+            tempList.add(selectedPart);
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter an available part to add.");
             alert.showAndWait();
         }
@@ -169,8 +158,8 @@ public class ModifyProductController {
     @FXML
     void OnAddProductRemovePartButtonClick(ActionEvent event) {
         Part selectedPart = ModifyProductAssocTableView.getSelectionModel().getSelectedItem();
-        assocPartListProducts.remove(selectedPart);
-        selectedProduct.deleteAssociatedPart(selectedPart);
+
+        tempList.remove(selectedPart);
     }
 
     @FXML
@@ -221,13 +210,12 @@ public class ModifyProductController {
             selectedProduct.setPrice(price);
             selectedProduct.setStock(inv);
             selectedProduct.setName(ModifyProductNameTextField.getText());
-            if (!(assocPartListProducts.isEmpty())){
-                for (Part part : assocPartListProducts) {
+            tempList = ModifyProductAssocTableView.getItems();
+            for (Part part : tempList) {
+                if (!(selectedProduct.getAllAssociatedParts().contains(part))) {
                     selectedProduct.addAssociatedPart(part);
                 }
-            }
-
-            goToMain(event);
+            } goToMain(event);
 
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);

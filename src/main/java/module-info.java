@@ -1,6 +1,7 @@
 module petrizzi.c482 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires annotations;
 
 
     opens petrizzi.c482 to javafx.fxml, javafx.base;

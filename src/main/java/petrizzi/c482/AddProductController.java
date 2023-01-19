@@ -153,7 +153,6 @@ public class AddProductController implements Initializable {
         else if (selectedPart != null) {
             Part tempPart = selectedPart;
             assocPartList.add(tempPart);
-            /*availPartList.remove(tempPart);*/
         } else  if (selectedPart == null){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter an available part to add.");
             alert.showAndWait();
