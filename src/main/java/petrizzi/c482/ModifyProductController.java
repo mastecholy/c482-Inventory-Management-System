@@ -28,7 +28,6 @@ public class ModifyProductController {
 
     ObservableList<Part> availPartListProduct = FXCollections.observableArrayList();
     ObservableList<Part> assocPartListProducts = FXCollections.observableArrayList();
-    ObservableList<Part> tempList = FXCollections.observableArrayList();
 
     private Stage stage;
     private Scene scene;
@@ -45,7 +44,6 @@ public class ModifyProductController {
         availPartListProduct = getAllParts();
         ModifyProductTopTableView.setItems(availPartListProduct);
 
-
         ModifyProductIDTextField.setText(String.valueOf(selectedProduct.getId()));
         ModifyProductNameTextField.setText(selectedProduct.getName());
         ModifyProductPriceTextField.setText(String.valueOf(selectedProduct.getPrice()));
@@ -53,15 +51,13 @@ public class ModifyProductController {
         ModifyProductMaxTextField.setText(String.valueOf(selectedProduct.getMax()));
         ModifyProductMinTextField.setText(String.valueOf(selectedProduct.getMin()));
 
-
         ModifyProductTopTablePartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         ModifyProductTopTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ModifyProductTopTableInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         ModifyProductTopTablePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        assocPartListProducts = selectedProduct.getAllAssociatedParts();
-        tempList = assocPartListProducts;
-        ModifyProductAssocTableView.setItems(tempList);
+        assocPartListProducts.setAll(selectedProduct.getAllAssociatedParts());
+        ModifyProductAssocTableView.setItems(assocPartListProducts);
 
         AssocTablePartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         AssocPartTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -143,13 +139,14 @@ public class ModifyProductController {
     void OnAddProductAddPartButtonClick(ActionEvent event){
         Part selectedPart = ModifyProductTopTableView.getSelectionModel().getSelectedItem();
 
-        if (tempList.contains(selectedPart)) {
+        if (assocPartListProducts.contains(selectedPart)) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Part already associated with product.");
             alert.showAndWait();
         }
         else if (selectedPart != null) {
-            tempList.add(selectedPart);
-        } else {
+            assocPartListProducts.add(selectedPart);
+        }
+        else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter an available part to add.");
             alert.showAndWait();
         }
@@ -159,7 +156,10 @@ public class ModifyProductController {
     void OnAddProductRemovePartButtonClick(ActionEvent event) {
         Part selectedPart = ModifyProductAssocTableView.getSelectionModel().getSelectedItem();
 
-        tempList.remove(selectedPart);
+        if (selectedPart == null) {Alert alert = new Alert(Alert.AlertType.ERROR, "Please select an associated part to remove.");
+            alert.showAndWait();}
+
+        assocPartListProducts.remove(selectedPart);
     }
 
     @FXML
@@ -210,12 +210,11 @@ public class ModifyProductController {
             selectedProduct.setPrice(price);
             selectedProduct.setStock(inv);
             selectedProduct.setName(ModifyProductNameTextField.getText());
-            tempList = ModifyProductAssocTableView.getItems();
-            for (Part part : tempList) {
-                if (!(selectedProduct.getAllAssociatedParts().contains(part))) {
-                    selectedProduct.addAssociatedPart(part);
-                }
-            } goToMain(event);
+
+            selectedProduct.getAllAssociatedParts().setAll(assocPartListProducts);
+
+
+            goToMain(event);
 
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -229,6 +228,9 @@ public class ModifyProductController {
 
     @FXML
     void OnModifyProductCancelButtonClick(ActionEvent event) throws IOException {
+
+        assocPartListProducts.setAll(selectedProduct.getAllAssociatedParts());
+
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

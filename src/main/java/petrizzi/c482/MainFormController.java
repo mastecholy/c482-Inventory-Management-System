@@ -184,7 +184,7 @@ public class MainFormController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Product selectedProduct = MainFormProductsTable.getSelectionModel().getSelectedItem();
             if (selectedProduct == null) return;
-            Inventory.getAllParts().remove(selectedProduct);
+            Inventory.getAllProducts().remove(selectedProduct);
         }
     }
 
