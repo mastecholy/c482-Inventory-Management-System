@@ -61,34 +61,34 @@ public class MainFormController implements Initializable {
     private Button MainProductsModifyButton;
 
     @FXML
-    public TableView<Part> MainFormPartsTable;
+    private TableView<Part> MainFormPartsTable;
 
     @FXML
-    public TableColumn MainPartsTablePartIDColumn;
+    private TableColumn MainPartsTablePartIDColumn;
 
     @FXML
-    public TableColumn MainPartsTableNameColumn;
+    private TableColumn MainPartsTableNameColumn;
 
     @FXML
-    public TableColumn MainPartsTableInvColumn;
+    private TableColumn MainPartsTableInvColumn;
 
     @FXML
-    public TableColumn MainPartsTablePriceColumn;
+    private TableColumn MainPartsTablePriceColumn;
 
     @FXML
-    public TableView<Product> MainFormProductsTable;
+    private TableView<Product> MainFormProductsTable;
 
     @FXML
-    public TableColumn MainProductsTableIDColumn;
+    private TableColumn MainProductsTableIDColumn;
 
     @FXML
-    public TableColumn MainProductsTableNameColumn;
+    private TableColumn MainProductsTableNameColumn;
 
     @FXML
-    public TableColumn MainProductsTableInvColumn;
+    private TableColumn MainProductsTableInvColumn;
 
     @FXML
-    public TableColumn MainProductsTablePriceColumn;
+    private TableColumn MainProductsTablePriceColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -134,7 +134,13 @@ public class MainFormController implements Initializable {
 
     @FXML
     public void partSearchKeyEvent(KeyEvent event){
-            MainFormPartsTable.setItems(getAllFilteredParts(MainFormPartsSearchTextField.getText()));
+        MainFormPartsTable.setItems(getAllFilteredParts(MainFormPartsSearchTextField.getText()));
+
+    }
+
+    @FXML
+    public void productSearchKeyEvent(KeyEvent event){
+        MainFormProductsTable.setItems(getAllFilteredProducts(MainFormProductsSearchTextField.getText()));
 
     }
 
@@ -172,7 +178,7 @@ public class MainFormController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            Product selectedProduct = (Product) MainFormProductsTable.getSelectionModel().getSelectedItem();
+            Product selectedProduct = MainFormProductsTable.getSelectionModel().getSelectedItem();
             if (selectedProduct == null) return;
             Inventory.getAllParts().remove(selectedProduct);
         }
@@ -180,11 +186,19 @@ public class MainFormController implements Initializable {
 
     @FXML
     void OnMainProductsModifyButtonClick(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("modify-product-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Product selectedProduct = MainFormProductsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedProduct != null) {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("modify-product-view.fxml"));
+            root = loader.load();
+            ModifyProductController modifyProductController = loader.getController();
+            modifyProductController.setProduct(selectedProduct);
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 

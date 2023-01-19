@@ -59,7 +59,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextField fx:id="AddProductIDTextField" promptText="Auto Gen- Disabled" GridPane.columnIndex="1">
+                        <TextField fx:id="AddProductIDTextField" disable="true" promptText="Auto Gen- Disabled" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin></TextField>
@@ -94,46 +94,62 @@
             </VBox>
             <VBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="571.0" prefWidth="572.0">
                <children>
-                  <TextField fx:id="AddProductSearchTextField" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Search By Part ID or Name">
+                  <TextField fx:id="AddProductSearchTextField" maxWidth="-Infinity" onKeyReleased="#partSearchKeyEvent" prefHeight="25.0" prefWidth="200.0" promptText="Search By Part ID or Name">
                      <VBox.margin>
                         <Insets right="20.0" />
                      </VBox.margin>
                   </TextField>
+                  <Label text="All Parts">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets right="365.0" />
+                     </VBox.margin>
+                  </Label>
                   <TableView fx:id="AddPartTopTableView" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="52.0" text="Part ID" />
-                      <TableColumn prefWidth="126.0" text="Part Name" />
-                        <TableColumn prefWidth="100.0" text="Inventory Level" />
-                        <TableColumn prefWidth="123.0" text="Price/Cost per Unit" />
+                      <TableColumn fx:id="AddPartTablePartIDColumn" prefWidth="52.0" text="Part ID" />
+                      <TableColumn fx:id="AddPartTableNameColumn" prefWidth="126.0" text="Part Name" />
+                        <TableColumn fx:id="AddPartTableInvColumn" prefWidth="100.0" text="Inventory Level" />
+                        <TableColumn fx:id="AddPartTablePriceColumn" prefWidth="123.0" text="Price/Cost per Unit" />
                     </columns>
                      <VBox.margin>
-                        <Insets left="150.0" right="20.0" top="10.0" />
+                        <Insets left="150.0" right="20.0" />
                      </VBox.margin>
                   </TableView>
-                  <Button fx:id="AddProductAddButton" mnemonicParsing="false" text="Add">
+                  <Button fx:id="AddProductAddButton" mnemonicParsing="false" onAction="#OnAddProductAddPartButtonClick" text="Add">
                      <VBox.margin>
                         <Insets bottom="10.0" right="20.0" top="10.0" />
                      </VBox.margin>
                   </Button>
+                  <Label layoutX="175.0" layoutY="36.0" text="Associated Parts">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets right="310.0" />
+                     </VBox.margin>
+                  </Label>
                   <TableView fx:id="AddProductBottomTableView" layoutX="160.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0">
                      <columns>
-                        <TableColumn prefWidth="45.0" text="Part ID" />
-                        <TableColumn prefWidth="130.0" text="Part Name" />
-                        <TableColumn prefWidth="100.0" text="Inventory Level" />
-                        <TableColumn prefWidth="124.0" text="Price/Cost per Unit" />
+                        <TableColumn fx:id="AssocTablePartIDColumn" prefWidth="45.0" text="Part ID" />
+                        <TableColumn fx:id="AssocPartTableNameColumn" prefWidth="130.0" text="Part Name" />
+                        <TableColumn fx:id="AssocPartTableInvColumn" prefWidth="100.0" text="Inventory Level" />
+                        <TableColumn fx:id="AssocPartTablePriceColumn" prefWidth="124.0" text="Price/Cost per Unit" />
                      </columns>
                      <VBox.margin>
-                        <Insets left="150.0" right="20.0" top="10.0" />
+                        <Insets left="150.0" right="20.0" />
                      </VBox.margin>
                   </TableView>
-                  <Button fx:id="AddProductRemoveAssocPartButton" mnemonicParsing="false" text="Remove Associated Part">
+                  <Button fx:id="AddProductRemoveAssocPartButton" mnemonicParsing="false" onAction="#OnAddProductRemovePartButtonClick" text="Remove Associated Part">
                      <VBox.margin>
                         <Insets right="20.0" top="10.0" />
                      </VBox.margin>
                   </Button>
                   <HBox alignment="TOP_RIGHT" prefHeight="46.0" prefWidth="572.0" spacing="20.0">
                      <children>
-                        <Button fx:id="AddProductSaveButton" mnemonicParsing="false" text="Save" />
+                        <Button fx:id="AddProductSaveButton" mnemonicParsing="false" onAction="#OnAddProductSaveButtonClick" text="Save" />
                         <Button fx:id="AddProductCancelButton" mnemonicParsing="false" onAction="#OnAddProductCancelButtonClick" text="Cancel" />
                      </children>
                      <VBox.margin>

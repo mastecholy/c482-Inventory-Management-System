@@ -16,6 +16,7 @@ import petrizzi.c482.Models.Part;
 import java.io.IOException;
 
 import static petrizzi.c482.Models.Inventory.deletePart;
+import static petrizzi.c482.Models.Inventory.getAllParts;
 
 public class ModifyPartController {
 
@@ -196,7 +197,7 @@ public class ModifyPartController {
                     selectedPart.setStock(inv);
                     ((InHouse) selectedPart).setMachineID(machineID);
                 } else if (selectedPart instanceof Outsourced) {
-                    Inventory.deletePart(selectedPart);
+                    Inventory.deletePart(selectedPart, getAllParts());
                     InHouse addInHousePart = new InHouse(id, ModifyPartNameTextField.getText(),
                             price, inv, min, max, machineID);
                     Inventory.addPart(addInHousePart);
@@ -222,7 +223,7 @@ public class ModifyPartController {
                     selectedPart.setStock(inv);
                     ((Outsourced) selectedPart).setCompanyName(companyName);
                 } else if (selectedPart instanceof InHouse) {
-                    Inventory.deletePart(selectedPart);
+                    Inventory.deletePart(selectedPart, Inventory.getAllParts());
                     Outsourced addOutsourcedPart = new Outsourced(id, ModifyPartNameTextField.getText(),
                             price, inv, min, max, companyName);
                     Inventory.addPart(addOutsourcedPart);

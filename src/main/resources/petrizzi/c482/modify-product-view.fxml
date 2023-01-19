@@ -59,7 +59,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextField fx:id="ModifyProductIDTextField" promptText="Auto Gen- Disabled" GridPane.columnIndex="1">
+                        <TextField fx:id="ModifyProductIDTextField" disable="true" promptText="Auto Gen- Disabled" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin></TextField>

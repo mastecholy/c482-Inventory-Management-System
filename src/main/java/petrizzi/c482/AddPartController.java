@@ -91,7 +91,7 @@ public class AddPartController {
     private Button AddPartSaveButton;
 
     @FXML
-    private static int idCounter = 1;
+    public static int idCounter = 1;
 
     private void goToMain(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
@@ -200,10 +200,8 @@ public class AddPartController {
 
                 Inventory.addPart(addOutsourcedPart);
                 idCounter++;
-
                 goToMain(event);
             }
-
             }
 
             catch(NumberFormatException e){

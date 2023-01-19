@@ -74,20 +74,20 @@ public class Inventory {
         allProducts.set(index, newProduct);
     }
 
-    public static boolean deletePart(Part selectedPart) {
-        for (Part part : allParts) {
+    public static boolean deletePart(Part selectedPart, ObservableList<Part> partList) {
+        for (Part part : partList) {
             if (part.getId() == selectedPart.getId()) {
-                allParts.remove(part);
+                partList.remove(part);
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean deleteProduct(Product selectedProduct) {
-        for (Product product : allProducts) {
+    public static boolean deleteProduct(Product selectedProduct, ObservableList<Product> productList) {
+        for (Product product : productList) {
             if (product.getId() == selectedProduct.getId()) {
-                allProducts.remove(product);
+                productList.remove(product);
                 return true;
             }
         }
@@ -108,9 +108,20 @@ public class Inventory {
 
         return allFilteredParts;
     }
+
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
+    public static ObservableList<Product> getAllFilteredProducts(String query){
+        allFilteredProducts = lookupProduct(query);
+        try {
+            Product p = lookupProductID(Integer.parseInt(query));
+            allFilteredProducts.add(p);
+        } catch(NumberFormatException e) {}
+
+        return allFilteredProducts;
+    }
+
 
 
 }
