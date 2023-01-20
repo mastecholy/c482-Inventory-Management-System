@@ -25,9 +25,7 @@ import java.util.ResourceBundle;
 import static petrizzi.c482.Models.Inventory.getAllFilteredParts;
 import static petrizzi.c482.Models.Inventory.getAllParts;
 
-/**
- *
- * @author
+/* author
  * Massimiliano Petrizzi
  * mpetriz@wgu.edu
  * Student ID: 001386173

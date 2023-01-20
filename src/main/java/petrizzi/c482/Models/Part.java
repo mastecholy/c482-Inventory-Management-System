@@ -2,9 +2,7 @@ package petrizzi.c482.Models; /**
 * Supplied class Part.java 
  */
 
-/**
- *
- * @author
+/* author
  * Massimiliano Petrizzi
  * mpetriz@wgu.edu
  * Student ID: 001386173

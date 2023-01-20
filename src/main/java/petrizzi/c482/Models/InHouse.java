@@ -1,8 +1,6 @@
 package petrizzi.c482.Models;
 
-/**
- *
- * @author
+/* author
  * Massimiliano Petrizzi
  * mpetriz@wgu.edu
  * Student ID: 001386173

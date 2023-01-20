@@ -7,9 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- *
- * @author
+/* author
  * Massimiliano Petrizzi
  * mpetriz@wgu.edu
  * Student ID: 001386173

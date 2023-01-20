@@ -3,9 +3,7 @@ package petrizzi.c482.Models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author
+/* author
  * Massimiliano Petrizzi
  * mpetriz@wgu.edu
  * Student ID: 001386173

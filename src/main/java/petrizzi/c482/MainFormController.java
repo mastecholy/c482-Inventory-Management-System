@@ -23,9 +23,7 @@ import java.util.ResourceBundle;
 
 import static petrizzi.c482.Models.Inventory.*;
 
-/**
- *
- * @author
+/* author
  * Massimiliano Petrizzi
  * mpetriz@wgu.edu
  * Student ID: 001386173
