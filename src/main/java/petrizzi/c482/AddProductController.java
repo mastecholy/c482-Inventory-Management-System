@@ -27,7 +27,6 @@ import static petrizzi.c482.Models.Inventory.getAllParts;
 
 public class AddProductController implements Initializable {
 
-    Product newProduct;
     ObservableList<Part> availPartList = FXCollections.observableArrayList();
     ObservableList<Part> assocPartList = FXCollections.observableArrayList();
 
@@ -36,10 +35,6 @@ public class AddProductController implements Initializable {
     private Parent root;
 
     public static int idCounter = 1;
-    private static int max;
-    private static int min;
-    private static int inv;
-    private static double price;
 
     @FXML
     public TableView<Part> AddPartTopTableView;
@@ -95,12 +90,6 @@ public class AddProductController implements Initializable {
 
 
     @FXML
-    private Button AddProductAddButton;
-
-    @FXML
-    private Button AddProductCancelButton;
-
-    @FXML
     private TextField AddProductIDTextField;
 
     @FXML
@@ -117,12 +106,6 @@ public class AddProductController implements Initializable {
 
     @FXML
     private TextField AddProductPriceTextField;
-
-    @FXML
-    private Button AddProductRemoveAssocPartButton;
-
-    @FXML
-    private Button AddProductSaveButton;
 
     @FXML
     private TextField AddProductSearchTextField;
@@ -151,9 +134,8 @@ public class AddProductController implements Initializable {
             alert.showAndWait();
         }
         else if (selectedPart != null) {
-            Part tempPart = selectedPart;
-            assocPartList.add(tempPart);
-        } else  if (selectedPart == null){
+            assocPartList.add(selectedPart);
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter an available part to add.");
             alert.showAndWait();
         }
@@ -173,6 +155,7 @@ public class AddProductController implements Initializable {
             return;
         }
         try {
+            int inv;
             try {
                 inv = Integer.parseInt(AddProductInvTextField.getText());
             } catch (NumberFormatException e) {
@@ -180,6 +163,7 @@ public class AddProductController implements Initializable {
                 alert.showAndWait();
                 return;
             }
+            double price;
             try {
                 price = Double.parseDouble(AddProductPriceTextField.getText());}
             catch(NumberFormatException e) {
@@ -187,6 +171,7 @@ public class AddProductController implements Initializable {
                 alert.showAndWait();
                 return;
             }
+            int max;
             try {
                 max = Integer.parseInt(AddProductMaxTextField.getText());
             } catch (NumberFormatException e) {
@@ -194,6 +179,7 @@ public class AddProductController implements Initializable {
                 alert.showAndWait();
                 return;
             }
+            int min;
             try {
                 min = Integer.parseInt(AddProductMinTextField.getText());
             } catch (NumberFormatException e) {

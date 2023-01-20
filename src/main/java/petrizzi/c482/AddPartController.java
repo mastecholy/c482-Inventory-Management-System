@@ -23,30 +23,12 @@ public class AddPartController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private static double price;
-    private static int max;
-    private static int min;
-    private static int inv;
 
-    @FXML
-    private Button AddPartCancelButton;
-
-    @FXML
-    private Label AddPartCompanyNameLabel;
-
-    @FXML
-    private TextField AddPartCompanyNameTextField;
-
-    @FXML
-    private Label AddPartFormAddPartLabel;
     @FXML
     private TextField AddPartIDTextField;
 
     @FXML
     private RadioButton AddPartInHouseRadio;
-
-    @FXML
-    private Label AddPartInvLabel;
 
     @FXML
     private TextField AddPartInvTextField;
@@ -58,19 +40,10 @@ public class AddPartController {
     private TextField AddPartMachineIDTextField;
 
     @FXML
-    private Label AddPartMaxLabel;
-
-    @FXML
     private TextField AddPartMaxTextField;
 
     @FXML
-    private Label AddPartMinLabel;
-
-    @FXML
     private TextField AddPartMinTextField;
-
-    @FXML
-    private Label AddPartNameLabel;
 
     @FXML
     private TextField AddPartNameTextField;
@@ -79,16 +52,7 @@ public class AddPartController {
     private RadioButton AddPartOutsourcedRadio;
 
     @FXML
-    private Label AddPartPriceLabel;
-
-    @FXML
     private TextField AddPartPriceTextField;
-
-    @FXML
-    private ToggleGroup AddPartRadioGroup;
-
-    @FXML
-    private Button AddPartSaveButton;
 
     @FXML
     public static int idCounter = 1;
@@ -131,6 +95,7 @@ public class AddPartController {
             return;
         }
         try {
+            int inv;
             try {
                 inv = Integer.parseInt(AddPartInvTextField.getText());}
             catch(NumberFormatException e) {
@@ -138,6 +103,7 @@ public class AddPartController {
                 alert.showAndWait();
                 return;
             }
+            double price;
             try {
                 price = Double.parseDouble(AddPartPriceTextField.getText());}
             catch(NumberFormatException e) {
@@ -145,6 +111,7 @@ public class AddPartController {
                 alert.showAndWait();
                 return;
             }
+            int max;
             try {
                 max = Integer.parseInt(AddPartMaxTextField.getText());}
             catch(NumberFormatException e) {
@@ -152,6 +119,7 @@ public class AddPartController {
                 alert.showAndWait();
                 return;
             }
+            int min;
             try {
                 min = Integer.parseInt(AddPartMinTextField.getText());}
             catch(NumberFormatException e) {
@@ -203,18 +171,11 @@ public class AddPartController {
                 goToMain(event);
             }
             }
-
             catch(NumberFormatException e){
                 Alert alert= new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setContentText("Please enter valid inputs for every text field.");
                 alert.showAndWait();
             }
-
-
         }
-
-
-
-
 }

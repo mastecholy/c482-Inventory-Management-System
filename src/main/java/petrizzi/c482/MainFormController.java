@@ -1,8 +1,6 @@
 package petrizzi.c482;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import petrizzi.c482.Models.InHouse;
 import petrizzi.c482.Models.Inventory;
 import petrizzi.c482.Models.Part;
 import petrizzi.c482.Models.Product;
@@ -34,31 +30,10 @@ public class MainFormController implements Initializable {
     private Parent root;
 
     @FXML
-    private Button MainFormExitButton;
-
-    @FXML
     private TextField MainFormPartsSearchTextField;
 
     @FXML
     private TextField MainFormProductsSearchTextField;
-
-    @FXML
-    private Button MainPartsAddButton;
-
-    @FXML
-    private Button MainPartsDeleteButton;
-
-    @FXML
-    private Button MainPartsModifyButton;
-
-    @FXML
-    private Button MainProductsAddButton;
-
-    @FXML
-    private Button MainProductsDeleteButton;
-
-    @FXML
-    private Button MainProductsModifyButton;
 
     @FXML
     private TableView<Part> MainFormPartsTable;
@@ -119,12 +94,19 @@ public class MainFormController implements Initializable {
 
     @FXML
     void OnMainPartsDeleteButtonClick(ActionEvent event) {
+        Part selectedPart = (Part) MainFormPartsTable.getSelectionModel().getSelectedItem();
+        for (Product product : getAllProducts()) {
+            if (product.getAllAssociatedParts().contains(selectedPart)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Selected part is associated with a product.");
+                alert.showAndWait();
+                return;
+            }
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected part?");
         alert.setTitle("DELETE PART?");
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            Part selectedPart = (Part) MainFormPartsTable.getSelectionModel().getSelectedItem();
             if (selectedPart == null) return;
             Inventory.getAllParts().remove(selectedPart);
         }
@@ -211,8 +193,12 @@ public class MainFormController implements Initializable {
 
     @FXML
     void OnMainExitButtonClick(ActionEvent event) {
-        Platform.exit();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
+        alert.setTitle("Exit Program?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Platform.exit();
+        }
     }
-
-
 }

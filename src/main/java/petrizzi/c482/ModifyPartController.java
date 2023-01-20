@@ -15,7 +15,6 @@ import petrizzi.c482.Models.Part;
 
 import java.io.IOException;
 
-import static petrizzi.c482.Models.Inventory.deletePart;
 import static petrizzi.c482.Models.Inventory.getAllParts;
 
 public class ModifyPartController {
@@ -25,11 +24,6 @@ public class ModifyPartController {
     private Parent root;
 
     private Part selectedPart;
-
-    private static double price;
-    private static int max;
-    private static int min;
-    private static int inv;
 
     void setPart (Part part) {
         selectedPart = part;
@@ -50,28 +44,11 @@ public class ModifyPartController {
         }
     }
 
-
-
-    @FXML
-    private Button ModifyPartCancelButton;
-
-    @FXML
-    private Label ModifyPartCompanyNameLabel;
-
-    @FXML
-    private TextField ModifyPartCompanyNameTextField;
-
-    @FXML
-    private Label ModifyPartFormModifyPartLabel;
-
     @FXML
     private TextField ModifyPartIDTextField;
 
     @FXML
     private RadioButton ModifyPartInHouseRadio;
-
-    @FXML
-    private Label ModifyPartInvLabel;
 
     @FXML
     private TextField ModifyPartInvTextField;
@@ -83,19 +60,10 @@ public class ModifyPartController {
     private TextField ModifyPartMachineIDTextField;
 
     @FXML
-    private Label ModifyPartMaxLabel;
-
-    @FXML
     private TextField ModifyPartMaxTextField;
 
     @FXML
-    private Label ModifyPartMinLabel;
-
-    @FXML
     private TextField ModifyPartMinTextField;
-
-    @FXML
-    private Label ModifyPartNameLabel;
 
     @FXML
     private TextField ModifyPartNameTextField;
@@ -104,16 +72,7 @@ public class ModifyPartController {
     private RadioButton ModifyPartOutsourcedRadio;
 
     @FXML
-    private Label ModifyPartPriceLabel;
-
-    @FXML
     private TextField ModifyPartPriceTextField;
-
-    @FXML
-    private ToggleGroup ModifyPartRadioGroup;
-
-    @FXML
-    private Button ModifyPartSaveButton;
 
     @FXML
     void OnOutsourcedRadioButtonClick(ActionEvent event) {
@@ -144,6 +103,7 @@ public class ModifyPartController {
             return;
         }
         try {
+            int inv;
             try {
                 inv = Integer.parseInt(ModifyPartInvTextField.getText());}
             catch(NumberFormatException e) {
@@ -151,6 +111,7 @@ public class ModifyPartController {
                 alert.showAndWait();
                 return;
             }
+            double price;
             try {
                 price = Double.parseDouble(ModifyPartPriceTextField.getText());}
             catch(NumberFormatException e) {
@@ -158,6 +119,7 @@ public class ModifyPartController {
                 alert.showAndWait();
                 return;
             }
+            int max;
             try {
                 max = Integer.parseInt(ModifyPartMaxTextField.getText());}
             catch(NumberFormatException e) {
@@ -165,6 +127,7 @@ public class ModifyPartController {
                 alert.showAndWait();
                 return;
             }
+            int min;
             try {
                 min = Integer.parseInt(ModifyPartMinTextField.getText());}
             catch(NumberFormatException e) {

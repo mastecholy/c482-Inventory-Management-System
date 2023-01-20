@@ -5,21 +5,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
-import petrizzi.c482.Models.*;
-
+import petrizzi.c482.Models.Part;
+import petrizzi.c482.Models.Product;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import static petrizzi.c482.Models.Inventory.getAllFilteredParts;
 import static petrizzi.c482.Models.Inventory.getAllParts;
@@ -33,11 +32,6 @@ public class ModifyProductController {
     private Scene scene;
     private Parent root;
     private Product selectedProduct;
-
-    private static int max;
-    private static int min;
-    private static int inv;
-    private static double price;
 
     void setProduct (Product tempSelectedProduct) {
         selectedProduct = tempSelectedProduct;
@@ -97,12 +91,6 @@ public class ModifyProductController {
     public TableColumn<Object, Object> AssocPartTablePriceColumn;
 
     @FXML
-    private Button ModifyProductAddButton;
-
-    @FXML
-    private Button ModifyProductCancelButton;
-
-    @FXML
     private TextField ModifyProductIDTextField;
 
     @FXML
@@ -119,12 +107,6 @@ public class ModifyProductController {
 
     @FXML
     private TextField ModifyProductPriceTextField;
-
-    @FXML
-    private Button ModifyProductRemoveAssocPartButton;
-
-    @FXML
-    private Button ModifyProductSaveButton;
 
     @FXML
     private TextField ModifyProductSearchTextField;
@@ -170,6 +152,7 @@ public class ModifyProductController {
             return;
         }
         try {
+            int inv;
             try {
                 inv = Integer.parseInt(ModifyProductInvTextField.getText());
             } catch (NumberFormatException e) {
@@ -177,6 +160,7 @@ public class ModifyProductController {
                 alert.showAndWait();
                 return;
             }
+            double price;
             try {
                 price = Double.parseDouble(ModifyProductPriceTextField.getText());}
             catch(NumberFormatException e) {
@@ -184,6 +168,7 @@ public class ModifyProductController {
                 alert.showAndWait();
                 return;
             }
+            int max;
             try {
                 max = Integer.parseInt(ModifyProductMaxTextField.getText());
             } catch (NumberFormatException e) {
@@ -191,6 +176,7 @@ public class ModifyProductController {
                 alert.showAndWait();
                 return;
             }
+            int min;
             try {
                 min = Integer.parseInt(ModifyProductMinTextField.getText());
             } catch (NumberFormatException e) {
@@ -212,8 +198,6 @@ public class ModifyProductController {
             selectedProduct.setName(ModifyProductNameTextField.getText());
 
             selectedProduct.getAllAssociatedParts().setAll(assocPartListProducts);
-
-
             goToMain(event);
 
         } catch (NumberFormatException e) {
@@ -222,8 +206,6 @@ public class ModifyProductController {
             alert.setContentText("Please enter valid inputs for every text field.");
             alert.showAndWait();
         }
-
-
     }
 
     @FXML
@@ -245,6 +227,4 @@ public class ModifyProductController {
         stage.setScene(scene);
         stage.show();
     }
-
-
 }
