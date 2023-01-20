@@ -14,8 +14,18 @@ import petrizzi.c482.Models.Outsourced;
 
 import java.io.IOException;
 
+/**
+ *
+ * @author
+ * Massimiliano Petrizzi
+ * mpetriz@wgu.edu
+ * Student ID: 001386173
+ */
+
+/** Controller for the Add Part screen.*/
 public class AddPartController {
 
+    /** Initialize function that populates the ID text field.*/
     public void initialize() {
         AddPartIDTextField.setText(String.valueOf(idCounter));
     }
@@ -57,6 +67,7 @@ public class AddPartController {
     @FXML
     public static int idCounter = 1;
 
+    /** Function that sends the program to the Main Form screen.*/
     private void goToMain(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -66,6 +77,7 @@ public class AddPartController {
     }
 
 
+    /** Function that cancels the Add Part action and returns to Main Form.*/
     @FXML
     void OnAddPartCancelButtonClick(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
@@ -75,17 +87,20 @@ public class AddPartController {
         stage.show();
     }
 
+    /** Event that toggles the Outsourced radio button and changes form text to match.*/
     @FXML
     void OnOutsourcedRadioButtonClick(ActionEvent event) {
             AddPartMachineIDLabel.setText("Company Name");
     }
 
+    /** Event that toggles the InHouse radio button and changes form text to match.*/
     @FXML
     void OnInHouseRadioButtonClick(ActionEvent event) {
         AddPartMachineIDLabel.setText("Machine ID");
     }
 
 
+    /** Function that saves the added part and returns to Main Form*/
     @FXML
     void OnAddPartSaveButtonClick(ActionEvent event) throws IOException {
 

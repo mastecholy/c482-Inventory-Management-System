@@ -25,6 +25,15 @@ import java.util.ResourceBundle;
 import static petrizzi.c482.Models.Inventory.getAllFilteredParts;
 import static petrizzi.c482.Models.Inventory.getAllParts;
 
+/**
+ *
+ * @author
+ * Massimiliano Petrizzi
+ * mpetriz@wgu.edu
+ * Student ID: 001386173
+ */
+
+/** Controller for Add Product form that creates a new Product.*/
 public class AddProductController implements Initializable {
 
     ObservableList<Part> availPartList = FXCollections.observableArrayList();
@@ -66,6 +75,7 @@ public class AddProductController implements Initializable {
     @FXML
     public TableColumn AssocPartTablePriceColumn;
 
+    /** Initialize function that populates form ViewTables.*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AddProductIDTextField.setText(String.valueOf(idCounter));
@@ -110,12 +120,13 @@ public class AddProductController implements Initializable {
     @FXML
     private TextField AddProductSearchTextField;
 
+    /** Search KeyEvent that filters the All Parts table*/
     @FXML
     public void partSearchKeyEvent(KeyEvent event){
         AddPartTopTableView.setItems(getAllFilteredParts(AddProductSearchTextField.getText()));
-
     }
 
+    /** Cancel button event that returns to Main Form.*/
     @FXML
     void OnAddProductCancelButtonClick(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
@@ -125,6 +136,7 @@ public class AddProductController implements Initializable {
         stage.show();
     }
 
+    /** Add Part event that adds an associated part to the new product.*/
     @FXML
     void OnAddProductAddPartButtonClick(ActionEvent event){
         Part selectedPart = AddPartTopTableView.getSelectionModel().getSelectedItem();
@@ -141,12 +153,14 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /** Remove Part event that removes associated part from the new product.*/
     @FXML
     void OnAddProductRemovePartButtonClick(ActionEvent event) {
         Part selectedPart = AddProductBottomTableView.getSelectionModel().getSelectedItem();
         assocPartList.remove(selectedPart);
     }
 
+    /** Save button event that creates the new product and returns to Main Form*/
     @FXML
     void OnAddProductSaveButtonClick(ActionEvent event) throws IOException {
         if (AddProductNameTextField.getText().isBlank()) {
@@ -210,10 +224,9 @@ public class AddProductController implements Initializable {
             alert.setContentText("Please enter valid inputs for every text field.");
             alert.showAndWait();
         }
-
-
     }
 
+    /** Returns the program to the Main Form.*/
     private void goToMain(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -221,6 +234,4 @@ public class AddProductController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
 }

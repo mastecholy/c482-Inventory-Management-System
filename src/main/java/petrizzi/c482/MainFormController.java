@@ -23,6 +23,15 @@ import java.util.ResourceBundle;
 
 import static petrizzi.c482.Models.Inventory.*;
 
+/**
+ *
+ * @author
+ * Massimiliano Petrizzi
+ * mpetriz@wgu.edu
+ * Student ID: 001386173
+ */
+
+/** Controller for Main Form*/
 public class MainFormController implements Initializable {
 
     private Stage stage;
@@ -65,6 +74,7 @@ public class MainFormController implements Initializable {
     @FXML
     private TableColumn MainProductsTablePriceColumn;
 
+    /** Initialize method that populates Main Form view tables.*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -82,6 +92,7 @@ public class MainFormController implements Initializable {
         MainProductsTablePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    /** Add Button event that brings application to Add Part form.*/
     @FXML
     void OnMainPartsAddButtonClick(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("add-part-view.fxml"));
@@ -92,6 +103,7 @@ public class MainFormController implements Initializable {
 
     }
 
+    /** Delete button event that deletes selected Part object.*/
     @FXML
     void OnMainPartsDeleteButtonClick(ActionEvent event) {
         Part selectedPart = (Part) MainFormPartsTable.getSelectionModel().getSelectedItem();
@@ -114,18 +126,21 @@ public class MainFormController implements Initializable {
 
     }
 
+    /** Search key event that filters the Parts view table.*/
     @FXML
     public void partSearchKeyEvent(KeyEvent event){
         MainFormPartsTable.setItems(getAllFilteredParts(MainFormPartsSearchTextField.getText()));
 
     }
 
+    /** Search key event that filters the Products view table.*/
     @FXML
     public void productSearchKeyEvent(KeyEvent event){
         MainFormProductsTable.setItems(getAllFilteredProducts(MainFormProductsSearchTextField.getText()));
 
     }
 
+    /** Modify Button event that brings the selected Part to the Modify Part form.*/
     @FXML
     void OnMainPartsModifyButtonClick(ActionEvent event) throws IOException {
         Part selectedPart = MainFormPartsTable.getSelectionModel().getSelectedItem();
@@ -148,6 +163,7 @@ public class MainFormController implements Initializable {
 
     }
 
+    /** Add Button event that brings application to the Add Product form.*/
     @FXML
     void OnMainProductsAddButtonClick(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
@@ -157,6 +173,7 @@ public class MainFormController implements Initializable {
         stage.show();
     }
 
+    /** Delete Button event that deletes the selected Product.*/
     @FXML
     void OnMainProductsDeleteButtonClick(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected product?");
@@ -170,6 +187,7 @@ public class MainFormController implements Initializable {
         }
     }
 
+    /** Modify Button event that brings selected Product to the Modify Product form.*/
     @FXML
     void OnMainProductsModifyButtonClick(ActionEvent event) throws IOException {
         Product tempSelectedProduct = MainFormProductsTable.getSelectionModel().getSelectedItem();
@@ -191,6 +209,7 @@ public class MainFormController implements Initializable {
         }
     }
 
+    /** Exit button event that confirms if the user would like to exit application.*/
     @FXML
     void OnMainExitButtonClick(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");

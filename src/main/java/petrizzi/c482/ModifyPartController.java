@@ -17,6 +17,15 @@ import java.io.IOException;
 
 import static petrizzi.c482.Models.Inventory.getAllParts;
 
+/**
+ *
+ * @author
+ * Massimiliano Petrizzi
+ * mpetriz@wgu.edu
+ * Student ID: 001386173
+ */
+
+/** Controller for Modify Part form.*/
 public class ModifyPartController {
 
     private Stage stage;
@@ -25,6 +34,8 @@ public class ModifyPartController {
 
     private Part selectedPart;
 
+    /** Called from Main Form to initialize Modify Part form and populate fields with Part info.
+     * @param part Part selected from the Main Form parts table.*/
     void setPart (Part part) {
         selectedPart = part;
         System.out.println(selectedPart);
@@ -74,16 +85,19 @@ public class ModifyPartController {
     @FXML
     private TextField ModifyPartPriceTextField;
 
+    /** Radio button event that toggles Outsourced and modifies form text to match.*/
     @FXML
     void OnOutsourcedRadioButtonClick(ActionEvent event) {
         ModifyPartMachineIDLabel.setText("Company Name");
     }
 
+    /** Radio button event that toggles InHouse and modifies form text to match.*/
     @FXML
     void OnInHouseRadioButtonClick(ActionEvent event) {
         ModifyPartMachineIDLabel.setText("Machine ID");
     }
 
+    /** Cancel Button event that aborts Part modification and returns to Main Form.*/
     @FXML
     void OnModifyPartCancelButtonClick(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
@@ -93,6 +107,7 @@ public class ModifyPartController {
         stage.show();
     }
 
+    /** Save Button event that finalizes Part modification and returns to Main Form.*/
     @FXML
     void OnModifyPartSaveButtonClick(ActionEvent event) throws IOException {
         int id = Integer.parseInt(ModifyPartIDTextField.getText());
@@ -206,6 +221,7 @@ public class ModifyPartController {
 
     }
 
+    /** Method that returns application to Main Form.*/
     private void goToMain(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

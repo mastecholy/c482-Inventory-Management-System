@@ -23,6 +23,15 @@ import java.io.IOException;
 import static petrizzi.c482.Models.Inventory.getAllFilteredParts;
 import static petrizzi.c482.Models.Inventory.getAllParts;
 
+/**
+ *
+ * @author
+ * Massimiliano Petrizzi
+ * mpetriz@wgu.edu
+ * Student ID: 001386173
+ */
+
+/** Controller for Modify Product form.*/
 public class ModifyProductController {
 
     ObservableList<Part> availPartListProduct = FXCollections.observableArrayList();
@@ -33,6 +42,8 @@ public class ModifyProductController {
     private Parent root;
     private Product selectedProduct;
 
+    /** Called from Main Form to initialize Modify Product form and populate fields with selected Product info.
+     * @param tempSelectedProduct Product selected from Main Form products table.*/
     void setProduct (Product tempSelectedProduct) {
         selectedProduct = tempSelectedProduct;
         availPartListProduct = getAllParts();
@@ -111,12 +122,14 @@ public class ModifyProductController {
     @FXML
     private TextField ModifyProductSearchTextField;
 
+    /** Search KeyEvent that filters the All Parts view table.*/
     @FXML
     public void partSearchKeyEvent(KeyEvent event){
         ModifyProductTopTableView.setItems(getAllFilteredParts(ModifyProductSearchTextField.getText()));
 
     }
 
+    /** Add Button event that adds selected Part to Product associated parts.*/
     @FXML
     void OnAddProductAddPartButtonClick(ActionEvent event){
         Part selectedPart = ModifyProductTopTableView.getSelectionModel().getSelectedItem();
@@ -134,6 +147,7 @@ public class ModifyProductController {
         }
     }
 
+    /** Remove Button event that removes selected Part from Product associated parts.*/
     @FXML
     void OnAddProductRemovePartButtonClick(ActionEvent event) {
         Part selectedPart = ModifyProductAssocTableView.getSelectionModel().getSelectedItem();
@@ -144,6 +158,13 @@ public class ModifyProductController {
         assocPartListProducts.remove(selectedPart);
     }
 
+    /** RUNTIME ERROR
+     * An error I encountered with this program was that the Product's associated parts
+     * were not correctly updating on saving or cancelling the modifications. This ended up
+     * being cause by me improperly setting Observable Array lists as equal to each other
+     * rather than using "setAll" to ensure the lists had the same components.
+     *
+     * Save Button event that finalizes Product modification and returns to Main Form.*/
     @FXML
     void OnModifyProductSaveButtonClick(ActionEvent event) throws IOException {
         if (ModifyProductNameTextField.getText().isBlank()) {
@@ -208,6 +229,7 @@ public class ModifyProductController {
         }
     }
 
+    /** Cancel Button event that aborts Product modification.*/
     @FXML
     void OnModifyProductCancelButtonClick(ActionEvent event) throws IOException {
 
@@ -220,6 +242,7 @@ public class ModifyProductController {
         stage.show();
     }
 
+    /** Brings application to Main Form.*/
     private void goToMain(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("main-form-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

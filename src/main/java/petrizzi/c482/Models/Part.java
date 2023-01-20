@@ -4,7 +4,10 @@ package petrizzi.c482.Models; /**
 
 /**
  *
- * @author Massimiliano Petrizzi
+ * @author
+ * Massimiliano Petrizzi
+ * mpetriz@wgu.edu
+ * Student ID: 001386173
  */
 public abstract class Part {
     private int id;
