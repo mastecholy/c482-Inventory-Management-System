@@ -174,13 +174,17 @@ public class MainFormController implements Initializable {
     /** Delete Button event that deletes the selected Product.*/
     @FXML
     void OnMainProductsDeleteButtonClick(ActionEvent event) {
+        Product selectedProduct = MainFormProductsTable.getSelectionModel().getSelectedItem();
+            if (!(selectedProduct.getAllAssociatedParts().isEmpty())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Selected product is associated with a part.");
+                alert.showAndWait();
+                return;
+            }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected product?");
         alert.setTitle("DELETE PRODUCT?");
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            Product selectedProduct = MainFormProductsTable.getSelectionModel().getSelectedItem();
-            if (selectedProduct == null) return;
             Inventory.getAllProducts().remove(selectedProduct);
         }
     }

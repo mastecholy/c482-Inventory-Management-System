@@ -132,11 +132,15 @@ public class Inventory {
      * @param query part name to be searched
      * @return returns all parts matching search*/
     public static ObservableList<Part> getAllFilteredParts(String query){
-        allFilteredParts = lookupPart(query);
+        allFilteredParts.setAll(lookupPart(query));
+
         try {
             Part p = lookupPartID(Integer.parseInt(query));
-            allFilteredParts.add(p);
-        } catch(NumberFormatException e) {}
+            if (allFilteredParts.contains(p)) {
+                return allFilteredParts;
+            } else {allFilteredParts.add(p);}
+
+        } catch(NumberFormatException ignored) {}
 
         return allFilteredParts;
     }
@@ -154,12 +158,12 @@ public class Inventory {
         allFilteredProducts = lookupProduct(query);
         try {
             Product p = lookupProductID(Integer.parseInt(query));
-            allFilteredProducts.add(p);
-        } catch(NumberFormatException e) {}
+            if (allFilteredProducts.contains(p)) {
+                return allFilteredProducts;
+            } else { allFilteredProducts.add(p);}
+        } catch(NumberFormatException ignored) {}
 
         return allFilteredProducts;
     }
-
-
 
 }
