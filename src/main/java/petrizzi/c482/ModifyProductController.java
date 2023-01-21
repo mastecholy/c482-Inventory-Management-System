@@ -159,7 +159,7 @@ public class ModifyProductController {
     /** RUNTIME ERROR
      * An error I encountered with this program was that the Product's associated parts
      * were not correctly updating on saving or cancelling the modifications. This ended up
-     * being cause by me improperly setting Observable Array lists as equal to each other
+     * being caused by me improperly setting Observable Array lists as equal to each other
      * rather than using "setAll" to ensure the lists had the same components.
      *
      * Save Button event that finalizes Product modification and returns to Main Form.*/
