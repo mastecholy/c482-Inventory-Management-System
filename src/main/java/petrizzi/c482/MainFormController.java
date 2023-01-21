@@ -121,7 +121,7 @@ public class MainFormController implements Initializable {
             Inventory.getAllParts().remove(selectedPart);
         }
 
-
+        MainFormPartsTable.setItems(getAllFilteredParts(MainFormPartsSearchTextField.getText()));
     }
 
     /** Search key event that filters the Parts view table.*/
@@ -187,6 +187,8 @@ public class MainFormController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Inventory.getAllProducts().remove(selectedProduct);
         }
+
+        MainFormProductsTable.setItems(getAllFilteredProducts(MainFormProductsSearchTextField.getText()));
     }
 
     /** Modify Button event that brings selected Product to the Modify Product form.*/
